@@ -1,0 +1,6 @@
+drop table if exists Stations;
+drop table if exists SelectedStations;
+
+create table Stations(id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(100), homepageUrl varchar(200), streamUrl varchar(200));
+
+create table SelectedStations(id int);

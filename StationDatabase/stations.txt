@@ -1,0 +1,6 @@
+insert into Stations(name, homepageUrl, streamUrl) values('Technobase', 'http://www.technobase.fm', 'http://listen.technobase.fm/tunein-aacplus-pls');
+insert into Stations(name, homepageUrl, streamUrl) values('Techno4ever', 'http://www.techno4ever.net', 'http://listen.to.techno4ever.net/dsl/aac');
+insert into Stations(name, homepageUrl, streamUrl) values('SmoothJazz', 'http://www.smoothjazz.com', 'http://sj128.hnux.com');
+insert into Stations(name, homepageUrl, streamUrl) values('BlackBeats', 'http://www.blackbeats.fm', 'http://stream.blackbeatslive.de');
+insert into Stations(name, homepageUrl, streamUrl) values('181.fm', 'http://www.181.fm', 'http://108.61.73.119:10030');
+insert into Stations(name, homepageUrl, streamUrl) values('Metal Only', 'http://www.metal-only.de', 'http://server1.blitz-stream.de:4400');
