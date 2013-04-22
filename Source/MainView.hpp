@@ -244,7 +244,8 @@ private:
 		Connect(ID_MENUITEM_QUIT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainView::menu_OnQuit));
 
 		Connect(ID_MENUITEM_OPENRECORDINGFOLDER, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainView::menu_OnOpenRecordingFolder));
-		Connect(ID_MENUITEM_OPENRECORDINGFOLDERFORSTATION, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainView::menu_OnOpenRecordingFolderForStation));		
+		Connect(ID_MENUITEM_OPENRECORDINGFOLDERFORSTATION, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainView::menu_OnOpenRecordingFolderForStation));
+		Connect(ID_MENUITEM_RECORDALLSTATIONS, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainView::menu_OnRecordAllStations));
 	}
 
 	void CreateSizers()
@@ -368,6 +369,8 @@ private:
 			menu.Append(ID_MENUITEM_OPENRECORDINGFOLDERFORSTATION, menuItemText);
 		}
 
+		menu.Append(ID_MENUITEM_RECORDALLSTATIONS, "Record all stations");
+
 		PopupMenu(&menu, ScreenToClient(wxGetMousePosition()));
 	}
 
@@ -390,6 +393,11 @@ private:
 
 		const Station& station = GetStation(itemIndex);
 		pEventHandler_->OnOpenRecordingFolder(station);
+	}
+
+	void menu_OnRecordAllStations(wxMenuEvent&)
+	{
+		pEventHandler_->OnRecordAllStation(stations_);
 	}
 
 	long GetSelectedStationIndex() const
@@ -439,7 +447,8 @@ private:
 	{
 		ID_MENUITEM_QUIT,
 		ID_MENUITEM_OPENRECORDINGFOLDER,
-		ID_MENUITEM_OPENRECORDINGFOLDERFORSTATION
+		ID_MENUITEM_OPENRECORDINGFOLDERFORSTATION,
+		ID_MENUITEM_RECORDALLSTATIONS
 	};
 };
 

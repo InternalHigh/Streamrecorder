@@ -119,6 +119,11 @@ public:
 		mainController_.OnOpenRecordingFolder(station);
 	}
 
+	void OnRecordAllStation(const std::vector<Station>& stations)
+	{
+		mainController_.OnRecordAllStation(stations);
+	}
+
 	bool IsShutdown() const
 	{
 		return streamrecorder_.IsShutdown();

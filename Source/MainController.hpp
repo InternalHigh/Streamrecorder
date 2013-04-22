@@ -167,6 +167,21 @@ public:
 	{
 		streamrecorder_.OpenRecordingFolder(station);
 	}
+
+	void OnRecordAllStation(const std::vector<Station>& stations)
+	{
+		pView_->DisableRecording();
+
+		typedef std::vector<Station>::const_iterator StationIterator;
+
+		for(StationIterator current = stations.begin(); current != stations.end(); ++current)
+		{
+			const Station& station = *current;
+
+			EventHandler eventHandler(station.GetId());
+			streamrecorder_.StartRecording(station, eventHandler);
+		}
+	}
 private:
 	Streamrecorder& streamrecorder_;
 	TMainView* pView_;
