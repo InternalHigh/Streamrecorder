@@ -1,6 +1,6 @@
-![Streamrecorder](https://46.163.110.94/github/Streamrecorder.png)
+![Streamrecorder](http://46.163.110.94/github/Streamrecorder.png)
 
-#[Download](https://46.163.110.94/github/Streamrecorder%200.8.zip)
+#[Download](http://46.163.110.94/github/Streamrecorder%200.8.zip)
 
 How to build with Visual Studio
 -------------------------------
