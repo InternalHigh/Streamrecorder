@@ -133,29 +133,7 @@ private:
 		
 		shoutcastStream_.SetMetadataInterval(metadataInterval);
 
-		char* pContentType;
-		if(curl_easy_getinfo(pCurl_, CURLINFO_CONTENT_TYPE, &pContentType) != CURLE_OK)
-			return;
-
 		requiredHeadersReceived_ = true;
-
-		wxFileName::Mkdir(filePath_, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
-		
-		wxDateTime now = wxDateTime::Now();
-		wxString timestamp = now.Format("%Y-%m-%d %H-%M-%S");
-		std::string fileExtension = GetFileExtensionByContentType(pContentType);
-
-		wxFileName pathBuilder = wxFileName(filePath_, fileName_ + " " + timestamp, fileExtension);
-		std::string fullPath = std::string(pathBuilder.GetFullPath());
-
-		try
-		{
-			streamWriter_.OpenFile(fullPath);
-		}
-		catch(const RecordingError& recordingError)
-		{
-			SetError(recordingError);
-		}
 	}
 
 	std::string GetFileExtensionByContentType(const char* pContentType)
@@ -183,6 +161,12 @@ private:
 
 		if(!connected_)
 		{
+			char* pContentType;
+			if (curl_easy_getinfo(pCurl_, CURLINFO_CONTENT_TYPE, &pContentType) != CURLE_OK)
+				return;
+
+			OpenFile(pContentType);
+
 			eventHandler_.OnRecordingStarted();
 			connected_ = true;
 		}
@@ -199,6 +183,27 @@ private:
 			shoutcastStream_.ProcessBuffer(pBuffer, bufferSize);
 		}
 		catch(const RecordingError& recordingError)
+		{
+			SetError(recordingError);
+		}
+	}
+
+	void OpenFile(const char* pContentType)
+	{
+		wxFileName::Mkdir(filePath_, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
+
+		wxDateTime now = wxDateTime::Now();
+		wxString timestamp = now.Format("%Y-%m-%d %H-%M-%S");
+		std::string fileExtension = GetFileExtensionByContentType(pContentType);
+
+		wxFileName pathBuilder = wxFileName(filePath_, fileName_ + " " + timestamp, fileExtension);
+		std::string fullPath = std::string(pathBuilder.GetFullPath());
+
+		try
+		{
+			streamWriter_.OpenFile(fullPath);
+		}
+		catch (const RecordingError& recordingError)
 		{
 			SetError(recordingError);
 		}
