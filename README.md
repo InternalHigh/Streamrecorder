@@ -1,7 +1,3 @@
-![Streamrecorder](http://46.163.110.94/github/Streamrecorder.png)
-
-#[Download](http://46.163.110.94/github/Streamrecorder%200.8.zip)
-
 How to build with Visual Studio
 -------------------------------
 
