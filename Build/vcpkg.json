@@ -1,6 +1,7 @@
 {
   "dependencies": [
-	"wxwidgets",
-	"curl"
+    "wxwidgets",
+    "curl",
+    "sqlite3"
   ]
 }
