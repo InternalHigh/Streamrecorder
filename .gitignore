@@ -1,7 +1,6 @@
-Dependencies/
-Debug/
+build/
+out/
 .vs/
 *.mp3
 *.aac
 *.user
-
