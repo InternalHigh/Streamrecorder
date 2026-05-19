@@ -138,6 +138,7 @@ private:
 	static void OpenFolder(const std::string& path)
 	{
 		wxFileName pathBuilder(path);
+		pathBuilder.Normalize();
 		wxString folderPath(pathBuilder.GetFullPath());
 
 		wxFileName::Mkdir(folderPath, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
