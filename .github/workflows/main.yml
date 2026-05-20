@@ -11,6 +11,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Install autoconf
+      run: |
+        sudo apt install autoconf autoconf-archive automake libtool
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
