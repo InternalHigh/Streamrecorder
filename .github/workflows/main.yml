@@ -12,9 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install autoconf
+    - name: Install
       run: |
-        sudo apt install autoconf autoconf-archive automake libtool
+        sudo apt install autoconf-archive libltdl-dev
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
