@@ -14,7 +14,7 @@ jobs:
     
     - name: Install
       run: |
-        sudo apt install autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev
+        sudo apt install build-essential autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
