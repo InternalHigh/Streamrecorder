@@ -17,8 +17,11 @@ jobs:
       with:
         vcpkgGitCommitId: '432412eecac55981cf608cc12e5b4bd91768ec57'
 
-    - name: Configure & Build with CMake
-      uses: lukka/run-cmake@v10
-      with:
-        configurePreset: 'ninja-release'
-        buildPreset: 'ninja-release'
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_BUILD_TYPE=Release
+    
+    - name: Build
+      run: cmake --build build
