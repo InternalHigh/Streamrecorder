@@ -23,6 +23,6 @@ jobs:
       
     - name: Configure & Build
       uses: lukka/run-cmake@v10
-        with:
-          configurePreset: 'default'
-          buildPreset: 'default'
+      with:
+        configurePreset: 'default'
+        buildPreset: 'default'
