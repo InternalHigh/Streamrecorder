@@ -9,15 +9,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: true
     
     - name: Install system dependencies
       run: |
         sudo apt install build-essential autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
+        
+    - uses: lukka/get-cmake@latest
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
       with:
-        vcpkgGitCommitId: '432412eecac55981cf608cc12e5b4bd91768ec57'
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
       
     - name: Configure & Build
       uses: lukka/run-cmake@v10
