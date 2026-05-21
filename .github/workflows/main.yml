@@ -12,20 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install
+    - name: Install system dependencies
       run: |
-        sudo apt install build-essential python3 autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
+        sudo apt install build-essential autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
       with:
         vcpkgGitCommitId: '432412eecac55981cf608cc12e5b4bd91768ec57'
-
-    - name: Configure CMake
-      run: |
-        cmake -B build \
-          -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
-          -DCMAKE_BUILD_TYPE=Release
-    
-    - name: Build
-      run: cmake --build build
+      
+    - name: Configure & Build
+      uses: lukka/run-cmake@v10
