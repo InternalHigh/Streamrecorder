@@ -22,6 +22,6 @@ jobs:
         vcpkgGitCommitId: '432412eecac55981cf608cc12e5b4bd91768ec57'
       
     - name: Configure & Build
-      uses: lukka/run-cmake@v11
+      uses: lukka/run-cmake@v10
       with:
         configurePreset: 'default'
