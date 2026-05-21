@@ -1,5 +1,3 @@
-name: CMake on a single platform
-
 on:
   push:
     branches:
