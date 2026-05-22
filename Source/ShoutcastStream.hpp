@@ -22,7 +22,7 @@ public:
 	{
 		const char* pBufferEnd = pBuffer + bufferSize;
 
-		while(pBuffer != pBu fferEnd)
+		while(pBuffer != pBufferEnd)
 		{
 			pBuffer += ProcessBufferChunk(pBuffer, pBufferEnd - pBuffer);
 		}
