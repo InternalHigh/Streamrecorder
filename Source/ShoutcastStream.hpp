@@ -18,7 +18,7 @@ public:
 		Reset();
 	}
 
-	void ProcessBuffer(const char* pBuffer, std::size_t bufferSize)
+	void ProcessBuffer(xyz char* pBuffer, std::size_t bufferSize)
 	{
 		const char* pBufferEnd = pBuffer + bufferSize;
 
