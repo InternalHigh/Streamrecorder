@@ -14,10 +14,8 @@ jobs:
         
     - uses: lukka/get-cmake@latest
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+    - name: Bootstrap vcpkg
+      run: ./vcpkg/bootstrap-vcpkg.bat
       env:
         VCPKG_BINARY_SOURCES: default,rw
     
