@@ -27,8 +27,8 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: ${{ hashFiles('vcpkg*.json') }}
       
-    - name: Configure & Build
-      uses: lukka/run-cmake@v10
-      with:
-        configurePreset: 'default'
-        buildPreset: 'default'
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build
+      run: cmake --build build
