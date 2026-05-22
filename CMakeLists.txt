@@ -15,11 +15,6 @@ target_link_libraries(Streamrecorder wx::core wx::base)
 target_link_libraries(Streamrecorder CURL::libcurl)
 target_link_libraries(Streamrecorder unofficial::sqlite3::sqlite3)
 
-if(WIN32)
-    target_link_libraries(Streamrecorder ws2_32)
-    target_link_libraries(Streamrecorder wldap32)
-endif()
-
 add_custom_command(TARGET Streamrecorder
                    POST_BUILD 
                    COMMAND "${CMAKE_COMMAND}" -E copy 
