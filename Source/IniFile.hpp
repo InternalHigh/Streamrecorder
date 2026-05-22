@@ -18,7 +18,7 @@ public:
 		}
 	}
 
-	std::string ReadStr ing(const std::string& sectionName, const std::string& key) const
+	std::string ReadString(const std::string& sectionName, const std::string& key) const
 	{
 		std::string result;
 		ReadValue(sectionName, key, result);
