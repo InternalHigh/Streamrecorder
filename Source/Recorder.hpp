@@ -76,8 +76,8 @@ private:
 		curl_easy_setopt(pCurl_, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(pCurl_, CURLOPT_WRITEDATA, this);
 
-		curl_easy_setopt(pCurl_, CURLOPT_PROGRESSFUNCTION, ProgressCallback);
-		curl_easy_setopt(pCurl_, CURLOPT_PROGRESSDATA, this);
+		curl_easy_setopt(pCurl_, CURLOPT_XFERINFOFUNCTION, ProgressCallback);
+		curl_easy_setopt(pCurl_, CURLOPT_XFERINFODATA, this);
 		curl_easy_setopt(pCurl_, CURLOPT_NOPROGRESS, 0);
 
 		curl_easy_setopt(pCurl_, CURLOPT_HEADERFUNCTION, HeaderCallback);
@@ -209,7 +209,11 @@ private:
 		}
 	}
 
-	static int ProgressCallback(Recorder* pRecorder, double, double, double, double)
+	static int ProgressCallback(Recorder* pRecorder,
+		                        curl_off_t dltotal,
+		                        curl_off_t dlnow,
+		                        curl_off_t ultotal,
+		                        curl_off_t ulnow)
 	{
 		return pRecorder->stop_;
 	}
