@@ -5,18 +5,26 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+
+    runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v5
       with:
         submodules: true
-    
+
     - name: Install system dependencies
+      if: runner.os == 'Linux'
       run: |
         sudo apt install build-essential autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
         
-    - uses: lukka/get-cmake@latest
+    - name: Setup CMake
+      uses: lukka/get-cmake@latest
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v11
@@ -26,12 +34,13 @@ jobs:
         VCPKG_BINARY_SOURCES: default,rw
     
     - name: Set up binary cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: ${{ hashFiles('vcpkg*.json') }}
       
-    - name: Configure & Build
-      uses: lukka/run-cmake@v10
-      with:
-        configurePreset: 'default'
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+    - name: Build
+      run: cmake --build build
