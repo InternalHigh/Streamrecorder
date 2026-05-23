@@ -57,7 +57,10 @@ private:
 		return "Windows";
 #elif __LINUX__
 		return "Linux";
+#elif __APPLE__
+		return "MacOS";
 #endif
+		return "Unknown";
 	}
 };
 
