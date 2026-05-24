@@ -36,6 +36,5 @@ add_custom_command(TARGET Streamrecorder
                            "$<TARGET_FILE_DIR:Streamrecorder>")
 						   
 if(WIN32)
-	install(DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/"
-			DESTINATION bin)
+	install(DIRECTORY "$<TARGET_FILE_DIR:Streamrecorder>/" DESTINATION bin)
 endif()
