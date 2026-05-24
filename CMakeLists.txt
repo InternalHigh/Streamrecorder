@@ -20,4 +20,3 @@ add_custom_command(TARGET Streamrecorder
                    COMMAND "${CMAKE_COMMAND}" -E copy_directory 
                            "${CMAKE_CURRENT_LIST_DIR}/Data"
                            "$<TARGET_FILE_DIR:Streamrecorder>")
-						   
