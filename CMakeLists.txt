@@ -35,9 +35,7 @@ add_custom_command(TARGET Streamrecorder
                            "${CMAKE_CURRENT_LIST_DIR}/Data/stations.db"
                            "$<TARGET_FILE_DIR:Streamrecorder>")
 						   
-install(TARGETS Streamrecorder RUNTIME DESTINATION bin)
-
 if(WIN32)
-    install(DIRECTORY $<TARGET_FILE_DIR:Streamrecorder>/
-            DESTINATION bin)
+	install(DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/"
+			DESTINATION bin)
 endif()
