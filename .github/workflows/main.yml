@@ -12,6 +12,9 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    env:
+        VCPKG_BINARY_SOURCES: default,readwrite
+
     steps:
     - name: Checkout
       uses: actions/checkout@v5
