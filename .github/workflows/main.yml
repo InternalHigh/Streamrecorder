@@ -44,3 +44,7 @@ jobs:
 
     - name: Build
       run: cmake --build build --config Release
+  
+    - name: Zip
+      shell: pwsh
+      run: Compress-Archive -Path build/Release/* -DestinationPath app.zip
