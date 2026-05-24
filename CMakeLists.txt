@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Streamrecorder)
 
+include(CPack)
+
 find_package(wxWidgets CONFIG REQUIRED)
 find_package(CURL REQUIRED)
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
@@ -32,3 +34,6 @@ add_custom_command(TARGET Streamrecorder
                    COMMAND "${CMAKE_COMMAND}" -E copy 
                            "${CMAKE_CURRENT_LIST_DIR}/Data/stations.db"
                            "$<TARGET_FILE_DIR:Streamrecorder>")
+						   
+install(DIRECTORY $<TARGET_FILE_DIR:Streamrecorder>/
+        DESTINATION bin)
