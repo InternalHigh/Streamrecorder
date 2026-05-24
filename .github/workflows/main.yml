@@ -21,8 +21,12 @@ jobs:
     - name: Install system dependencies
       if: runner.os == 'Linux'
       run: |
-        sudo apt install autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
-        
+        sudo apt-get update
+        sudo apt-get install -y \
+          autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev \
+          libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
+          libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
+
     - name: Setup CMake
       uses: lukka/get-cmake@latest
 
