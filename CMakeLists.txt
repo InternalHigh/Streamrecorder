@@ -20,12 +20,4 @@ add_custom_command(TARGET Streamrecorder
                    COMMAND "${CMAKE_COMMAND}" -E copy_directory 
                            "${CMAKE_CURRENT_LIST_DIR}/Data"
                            "$<TARGET_FILE_DIR:Streamrecorder>")
-
-if(WIN32)
-	install(DIRECTORY "$<TARGET_FILE_DIR:Streamrecorder>/" DESTINATION .)
-else()
-	install(TARGETS Streamrecorder RUNTIME DESTINATION bin)
-endif()
-
-set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}")
-include(CPack)
+						   
