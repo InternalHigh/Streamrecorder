@@ -43,6 +43,7 @@ jobs:
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg*.json') }}
+        restore-keys: vcpkg-${{ matrix.os }}-
       
     - name: Configure CMake
       run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
