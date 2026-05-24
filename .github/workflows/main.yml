@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [windows-latest]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -55,4 +55,4 @@ jobs:
       if: runner.os == 'Windows'
       with:
         name: Output-${{ runner.os }}
-        path: build/Release/*
+        path: build/Release/
