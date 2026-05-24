@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-        VCPKG_BINARY_SOURCES: default,readwrite
+      VCPKG_BINARY_SOURCES: default,readwrite
 
     steps:
     - name: Checkout
