@@ -33,17 +33,17 @@ jobs:
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
 
-    - name: Debug vcpkg cache env.
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+
+    - name: Debug vcpkg cache env
       shell: bash
       run: |
         echo "VCPKG_DEFAULT_BINARY_CACHE=[${VCPKG_DEFAULT_BINARY_CACHE}]"
         echo "VCPKG_BINARY_SOURCES=[${VCPKG_BINARY_SOURCES}]"
         echo "VCPKG_ROOT=[${VCPKG_ROOT}]"
-
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
 
     - name: Set up vcpkg binary cache
       uses: actions/cache@v5
