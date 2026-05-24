@@ -45,14 +45,14 @@ jobs:
     - name: Build
       run: cmake --build build --config Release
   
-   - name: Package (Windows only)
-     if: runner.os == 'Windows'
-     run: cpack -G ZIP -C Release
-     working-directory: build
+    - name: Package (Windows only)
+      #if: runner.os == 'Windows'
+      run: cpack -G ZIP -C Release
+      working-directory: build
       
     - name: Upload (Windows only)
       uses: actions/upload-artifact@v4
-      if: runner.os == 'Windows'
+      #if: runner.os == 'Windows'
       with:
         name: Streamrecorder-${{ runner.os }}
         path: build/*.zip

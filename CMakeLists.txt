@@ -37,4 +37,6 @@ add_custom_command(TARGET Streamrecorder
 						   
 if(WIN32)
 	install(DIRECTORY "$<TARGET_FILE_DIR:Streamrecorder>/" DESTINATION .)
+else()
+	install(TARGETS Streamrecorder RUNTIME DESTINATION bin)
 endif()
