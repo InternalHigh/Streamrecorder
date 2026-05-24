@@ -18,11 +18,11 @@ target_link_libraries(Streamrecorder CURL::libcurl)
 target_link_libraries(Streamrecorder unofficial::sqlite3::sqlite3)
 
 add_custom_command(TARGET Streamrecorder
-                   POST_BUILD 
+                   POST_BUILD
                    COMMAND "${CMAKE_COMMAND}" -E copy_directory 
                            "${CMAKE_CURRENT_LIST_DIR}/Data"
                            "$<TARGET_FILE_DIR:Streamrecorder>")
-						   
+
 if(WIN32)
 	install(DIRECTORY "$<TARGET_FILE_DIR:Streamrecorder>/" DESTINATION .)
 else()
