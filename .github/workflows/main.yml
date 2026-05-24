@@ -54,5 +54,5 @@ jobs:
       uses: actions/upload-artifact@v5
       if: runner.os == 'Windows'
       with:
-        name: Streamrecorder-${{ runner.os }}
-        path: build/*.zip
+        name: ${{ runner.os }}
+        path: build/Streamrecorder.zip
