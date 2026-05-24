@@ -21,7 +21,7 @@ jobs:
     - name: Install system dependencies
       if: runner.os == 'Linux'
       run: |
-        sudo apt install build-essential autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
+        sudo apt install autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
         
     - name: Setup CMake
       uses: lukka/get-cmake@latest
@@ -49,5 +49,5 @@ jobs:
       uses: actions/upload-artifact@v6
       if: runner.os == 'Windows'
       with:
-        name: ${{ runner.os }}
+        name: Output-${{ runner.os }}
         path: build/Release/*.*
