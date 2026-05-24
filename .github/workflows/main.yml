@@ -47,7 +47,10 @@ jobs:
         restore-keys: vcpkg-${{ matrix.os }}-
       
     - name: Configure CMake
-      run: cmake -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release
+      run: >
+        cmake -B build
+        -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
       run: cmake --build build --config Release
