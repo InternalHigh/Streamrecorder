@@ -1,3 +1,3 @@
 #include "Application.hpp"
 
-IMPLEMENT_APP(Application) 
+IMPLEMENT_APP(Application)
