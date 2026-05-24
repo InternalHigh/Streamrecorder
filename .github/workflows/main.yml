@@ -46,7 +46,7 @@ jobs:
       run: cmake --build build --config Release
 
     - name: Upload (Windows only)
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       if: runner.os == 'Windows'
       with:
         name: ${{ runner.os }}
