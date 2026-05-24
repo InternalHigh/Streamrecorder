@@ -61,4 +61,4 @@ jobs:
       if: runner.os == 'Windows'
       with:
         name: Output-${{ runner.os }}
-        path: build/Release/
+        path: build/Release
