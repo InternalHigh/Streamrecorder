@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -33,11 +33,6 @@ jobs:
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
-
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
 
     - name: Set up vcpkg binary cache
       uses: actions/cache@v5
