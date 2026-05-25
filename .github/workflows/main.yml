@@ -37,22 +37,8 @@ jobs:
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
     - name: Setup MSVC environment
-      uses: ilammy/msvc-dev-cmd@v1
-
-    - name: Remove MinGW compilers
       if: runner.os == 'Windows'
-      shell: pwsh
-      run: Rename-Item C:\mingw64 mingw64_
-
-    - name: Remove MinGW compilers
-      if: runner.os == 'Windows'
-      shell: pwsh
-      run: Rename-Item C:\Strawberry Strawberry_
-
-    - name: Remove MinGW compilers
-      if: runner.os == 'Windows'
-      shell: pwsh
-      run: Rename-Item "C:\Program Files\LLVM" LLVM_
+      run: "C:/Program Files/Microsoft Visual Studio/18/Professional/VC/Auxiliary/Build/vcvars64.bat"
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
