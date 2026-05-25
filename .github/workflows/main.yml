@@ -54,6 +54,7 @@ jobs:
     - name: Configure CMake
       run: >
         cmake -B build -G "Ninja"
+        -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
