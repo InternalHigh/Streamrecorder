@@ -42,10 +42,10 @@ jobs:
 
     - name: Remove MinGW from PATH
       if: runner.os == 'Windows'
-        run: |
-          echo "## Removing MinGW from PATH"
-          echo "$env:PATH" | Out-String
-          $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notmatch 'mingw|msys' }) -join ';'
+      run: |
+        echo "## Removing MinGW from PATH"
+        echo "$env:PATH" | Out-String
+        $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notmatch 'mingw|msys' }) -join ';'
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
