@@ -34,9 +34,9 @@ jobs:
           libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
-#    - name: Set up MSVC environment
-#      if: runner.os == 'Windows'
-#      uses: ilammy/msvc-dev-cmd@v1
+    - name: Set up MSVC environment
+      if: runner.os == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
@@ -54,7 +54,6 @@ jobs:
     - name: Configure CMake
       run: >
         cmake -B build -G "Ninja"
-        -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
