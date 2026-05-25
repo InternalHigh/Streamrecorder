@@ -47,7 +47,7 @@ jobs:
         key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg*.json') }}
         restore-keys: vcpkg-${{ matrix.os }}-
 
-    - name: Configure
+    - name: Configure CMake
       run: >
         cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
@@ -55,7 +55,7 @@ jobs:
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
 
     - name: Build
-      run: cmake --build build
+      run: cmake --build build --config Release
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v6
