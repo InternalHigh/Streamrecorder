@@ -36,7 +36,7 @@ jobs:
       uses: lukka/get-cmake@v4.3.3
 
     - name: Create binary cache directory
-      run: mkdir -p "$VCPKG_DEFAULT_BINARY_CACHE"
+      run: mkdir -p "${{ env.VCPKG_DEFAULT_BINARY_CACHE }}"
 
     - name: Set up vcpkg binary cache
       uses: actions/cache@v5
