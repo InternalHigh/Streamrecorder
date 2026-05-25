@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -25,7 +25,7 @@ jobs:
       with:
         submodules: true
 
-    - name: Install system dependencies
+    - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
@@ -38,6 +38,7 @@ jobs:
       uses: lukka/get-cmake@v4.3.3
 
     - name: Create binary cache directory
+      shell: bash
       run: mkdir -p "${{ env.VCPKG_DEFAULT_BINARY_CACHE }}"
 
     - name: Set up vcpkg binary cache
@@ -52,14 +53,14 @@ jobs:
         cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
-        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
+        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifact
 
     - name: Build
       run: cmake --build build --config Release
 
-    - name: Upload artifacts
+    - name: Upload artifact
       uses: actions/upload-artifact@v6
       with:
         name: Output-${{ runner.os }}
-        path: artifacts
+        path: ${{ github.workspace }}/artifact
         if-no-files-found: error
