@@ -38,10 +38,8 @@ jobs:
 
     - name: Remove MinGW compilers
       if: runner.os == 'Windows'
-      shell: bash
-      run: |
-        rm /c/mingw64/bin/cc.exe
-        rm /c/mingw64/bin/c++.exe
+      shell: pwsh
+      run: Rename-Item C:\mingw64 mingw64_
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
