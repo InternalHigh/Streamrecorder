@@ -13,6 +13,10 @@ jobs:
         include:
           - os: windows-latest
             triplet: x64-windows
+          - os: ubuntu-latest
+            triplet: x64-linux-release
+          - os: macos-latest
+            triplet: arm64-osx-release 
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -27,7 +31,7 @@ jobs:
       with:
         submodules: true
 
-    - name: Install system dependencies
+    - name: Install dependencies (Linux)
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
@@ -35,10 +39,6 @@ jobs:
           autoconf-archive libltdl-dev libx11-dev libxft-dev libxext-dev \
           libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
-
-    - name: Setup MSVC environment
-      if: runner.os == 'Windows'
-      run: '"C:\Program Files\Microsoft Visual Studio\18\Professional\VC\Auxiliary\Build\vcvars64.bat"'
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
@@ -56,14 +56,14 @@ jobs:
 
     - name: Configure CMake
       run: >
-        cmake -B build -G "Ninja"
+        cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifact
         -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
 
     - name: Build
-      run: cmake --build build
+      run: cmake --build build --config Release
 
     - name: Upload artifact
       uses: actions/upload-artifact@v6
