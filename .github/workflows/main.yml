@@ -40,6 +40,13 @@ jobs:
           libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
+    - name: Remove MinGW from PATH
+      if: runner.os == 'Windows'
+        run: |
+          echo "## Removing MinGW from PATH"
+          echo "$env:PATH" | Out-String
+          $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notmatch 'mingw|msys' }) -join ';'
+
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
 
@@ -56,14 +63,14 @@ jobs:
 
     - name: Configure CMake
       run: >
-        cmake -B build
+        cmake -B build -G "Ninja"
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifact
         -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
 
     - name: Build
-      run: cmake --build build --config Release
+      run: cmake --build build
 
     - name: Upload artifact
       uses: actions/upload-artifact@v6
