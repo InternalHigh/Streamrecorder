@@ -15,6 +15,7 @@ jobs:
 
     env:
       VCPKG_BINARY_SOURCES: default,readwrite
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
 
     steps:
     - name: Checkout
@@ -34,9 +35,8 @@ jobs:
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
 
-    - name: Bootstrap vcpkg
-      run: |
-        ./vcpkg/bootstrap-vcpkg.bat
+    - name: Create binary cache directory
+      run: mkdir -p "$VCPKG_DEFAULT_BINARY_CACHE"
 
     - name: Set up vcpkg binary cache
       uses: actions/cache@v5
