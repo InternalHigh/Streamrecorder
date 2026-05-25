@@ -36,6 +36,9 @@ jobs:
           libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
+    - name: Setup MSVC environment
+      uses: ilammy/msvc-dev-cmd@v1
+
     - name: Remove MinGW compilers
       if: runner.os == 'Windows'
       shell: pwsh
