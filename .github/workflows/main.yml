@@ -1,3 +1,5 @@
+name: Build
+
 on:
   push:
     branches: [ "master" ]
@@ -15,6 +17,7 @@ jobs:
 
     env:
       VCPKG_BINARY_SOURCES: default,readwrite
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
 
     steps:
     - name: Checkout
@@ -34,10 +37,8 @@ jobs:
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+    - name: Create binary cache directory
+      run: mkdir -p "${{ env.VCPKG_DEFAULT_BINARY_CACHE }}"
 
     - name: Set up vcpkg binary cache
       uses: actions/cache@v5
@@ -45,19 +46,20 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg*.json') }}
         restore-keys: vcpkg-${{ matrix.os }}-
-      
+
     - name: Configure CMake
       run: >
         cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
 
     - name: Build
       run: cmake --build build --config Release
 
-    - name: Upload (Windows only)
+    - name: Upload artifacts
       uses: actions/upload-artifact@v6
-      if: runner.os == 'Windows'
       with:
         name: Output-${{ runner.os }}
-        path: build/Release
+        path: artifacts
+        if-no-files-found: error
