@@ -11,8 +11,12 @@ jobs:
     strategy:
       matrix:
         include:
+          - os: ubuntu-latest
+            triplet: x64-linux-release
           - os: windows-latest
-            preset: Windows
+            triplet: x64-windows-release
+          - os: macos-latest
+            triplet: arm64-osx-release 
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -52,10 +56,11 @@ jobs:
 
     - name: Configure CMake
       run: >
-        cmake -B build --preset=${{ matrix.preset }}
+        cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifact
+        -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
 
     - name: Build
       run: cmake --build build --config Release
