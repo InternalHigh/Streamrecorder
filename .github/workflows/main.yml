@@ -36,12 +36,12 @@ jobs:
           libxi-dev libxtst-dev libwayland-dev libxkbcommon-dev \
           libegl1-mesa-dev libibus-1.0-dev libgles2-mesa-dev libxrandr-dev
 
-    - name: Remove MinGW from PATH
+    - name: Remove MinGW compilers
       if: runner.os == 'Windows'
+      shell: bash
       run: |
-        echo "## Removing MinGW from PATH"
-        echo "$env:PATH" | Out-String
-        $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notmatch 'mingw|msys' }) -join ';'
+        rm /c/mingw64/bin/cc.exe
+        rm /c/mingw64/bin/c++.exe
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
