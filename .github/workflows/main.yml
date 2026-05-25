@@ -17,7 +17,7 @@ jobs:
 
     env:
       VCPKG_BINARY_SOURCES: default,readwrite
-VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
 
     steps:
     - name: Checkout
