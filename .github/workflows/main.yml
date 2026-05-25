@@ -1,3 +1,5 @@
+name: Build
+
 on:
   push:
     branches: [ "master" ]
@@ -8,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [windows-latest]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -44,19 +46,20 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg*.json') }}
         restore-keys: vcpkg-${{ matrix.os }}-
-      
-    - name: Configure CMake
+
+    - name: Configure
       run: >
         cmake -B build
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
+        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifacts
 
     - name: Build
-      run: cmake --build build --config Release
+      run: cmake --build build
 
-    - name: Upload (Windows only)
+    - name: Upload artifacts
       uses: actions/upload-artifact@v6
-      if: runner.os == 'Windows'
       with:
         name: Output-${{ runner.os }}
-        path: build/Release
+        path: artifacts
+        if-no-files-found: error
