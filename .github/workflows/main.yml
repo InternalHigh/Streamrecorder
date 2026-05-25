@@ -38,7 +38,7 @@ jobs:
 
     - name: Setup MSVC environment
       if: runner.os == 'Windows'
-      run: "C:/Program Files/Microsoft Visual Studio/18/Professional/VC/Auxiliary/Build/vcvars64.bat"
+      run: '"C:\Program Files\Microsoft Visual Studio\18\Professional\VC\Auxiliary\Build\vcvars64.bat"'
 
     - name: Setup CMake
       uses: lukka/get-cmake@v4.3.3
