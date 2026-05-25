@@ -10,13 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        include:
-          - os: windows-latest
-            triplet: x64-windows
-          - os: ubuntu-latest
-            triplet: x64-linux-release
-          - os: macos-latest
-            triplet: arm64-osx-release 
+        os: [windows-latest, ubuntu-latest, macos-latest]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -60,7 +54,6 @@ jobs:
         -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${{ github.workspace }}/artifact
-        -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
 
     - name: Build
       run: cmake --build build --config Release
